@@ -1,0 +1,22 @@
+# Credenciales y entorno
+.env
+*.env.local
+
+# Dependencias (no se usan en este proyecto)
+vendor/
+node_modules/
+package-lock.json
+composer.lock
+
+# Temporales del sistema / editor
+*.tmp
+*.log
+*.bak
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Subidas de usuarios (solo se versiona un .gitkeep si hace falta)
+public/assets/uploads/*
+!public/assets/uploads/.gitkeep

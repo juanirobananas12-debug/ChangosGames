@@ -1,0 +1,239 @@
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 14px;
+  border: 1px solid transparent;
+  border-radius: var(--radio-pequeno);
+  background: var(--color-primario);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.boton:hover {
+  background: var(--color-primario-hover);
+  transform: translateY(-1px);
+}
+
+.boton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.boton--secundario {
+  background: var(--color-superficie-2);
+  border-color: var(--color-borde);
+  color: var(--color-texto);
+}
+
+.boton--secundario:hover {
+  background: #273044;
+}
+
+.boton--peligro {
+  background: transparent;
+  border-color: var(--color-peligro);
+  color: var(--color-peligro);
+}
+
+.boton--peligro:hover {
+  background: rgba(255, 93, 115, 0.12);
+}
+
+.boton--enlace {
+  background: transparent;
+  border-color: transparent;
+  color: var(--color-texto-suave);
+  padding: 8px 10px;
+}
+
+.boton--activo {
+  background: var(--color-primario);
+  color: #fff;
+}
+
+.tarjeta {
+  padding: 18px;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  background: var(--color-superficie);
+  box-shadow: var(--sombra);
+}
+
+.tarjeta__titulo {
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.tarjeta__texto {
+  color: var(--color-texto-suave);
+  font-size: 0.85rem;
+}
+
+.tarjeta__pie {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.tarjeta__precio {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-acento);
+}
+
+.campo {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.campo__etiqueta {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-texto-suave);
+}
+
+.campo__control,
+input,
+select {
+  width: 100%;
+  padding: 9px 11px;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-pequeno);
+  background: var(--color-superficie-2);
+  color: var(--color-texto);
+  outline: none;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.18);
+}
+
+.formulario {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+  align-items: end;
+}
+
+.formulario--vertical {
+  grid-template-columns: 1fr;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.tabla th,
+.tabla td {
+  padding: 11px 13px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-borde);
+  white-space: nowrap;
+}
+
+.tabla th {
+  color: var(--color-texto-suave);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  background: var(--color-superficie-2);
+}
+
+.tabla tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.insignia {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: rgba(124, 92, 255, 0.16);
+  color: #c4b8ff;
+}
+
+.insignia--ok {
+  background: rgba(35, 213, 171, 0.14);
+  color: var(--color-acento);
+}
+
+.insignia--aviso {
+  background: rgba(255, 200, 87, 0.14);
+  color: var(--color-aviso);
+}
+
+.insignia--peligro {
+  background: rgba(255, 93, 115, 0.14);
+  color: var(--color-peligro);
+}
+
+.medidor {
+  padding: 16px;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  background: var(--color-superficie);
+}
+
+.medidor__etiqueta {
+  font-size: 0.75rem;
+  color: var(--color-texto-suave);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.medidor__valor {
+  margin-top: 6px;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.toast {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 50;
+  max-width: min(380px, calc(100% - 40px));
+  padding: 13px 17px;
+  border: 1px solid var(--color-acento);
+  border-radius: var(--radio-pequeno);
+  background: var(--color-superficie-2);
+  box-shadow: var(--sombra);
+  font-size: 0.88rem;
+}
+
+.toast[hidden] {
+  display: none;
+}
+
+.toast--error {
+  border-color: var(--color-peligro);
+}
+
+.vacio {
+  padding: 26px;
+  text-align: center;
+  color: var(--color-texto-suave);
+  border: 1px dashed var(--color-borde);
+  border-radius: var(--radio);
+}
+
+.separador {
+  height: 1px;
+  background: var(--color-borde);
+  margin: 22px 0;
+}

@@ -1,0 +1,19 @@
+:root {
+  --color-fondo: #0d1117;
+  --color-superficie: #161b25;
+  --color-superficie-2: #1e2532;
+  --color-borde: #2b3445;
+  --color-texto: #e8edf5;
+  --color-texto-suave: #9aa7bd;
+  --color-primario: #7c5cff;
+  --color-primario-hover: #947bff;
+  --color-acento: #23d5ab;
+  --color-peligro: #ff5d73;
+  --color-aviso: #ffc857;
+
+  --radio: 12px;
+  --radio-pequeno: 8px;
+  --sombra: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --espacio: 16px;
+  --tipografia: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}

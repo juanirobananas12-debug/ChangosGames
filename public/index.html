@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ChangosGames: venta, reserva e inventario de videojuegos.">
+  <title>ChangosGames</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__marca">
+      <span class="logo" aria-hidden="true">CG</span>
+      <div>
+        <h1>ChangosGames</h1>
+        <p>Tienda de videojuegos</p>
+      </div>
+    </div>
+    <nav class="topbar__nav" id="nav-principal" aria-label="Navegación principal"></nav>
+    <div class="topbar__sesion" id="sesion"></div>
+  </header>
+
+  <main class="contenedor">
+    <section id="seccion-catalogo" class="seccion" aria-label="Catálogo de productos"></section>
+    <section id="seccion-reservas" class="seccion" aria-label="Reservas" hidden></section>
+    <section id="seccion-ventas" class="seccion" aria-label="Ventas" hidden></section>
+    <section id="seccion-caja" class="seccion" aria-label="Caja y reportes" hidden></section>
+    <section id="seccion-cuentas" class="seccion" aria-label="Cuentas" hidden></section>
+    <section id="seccion-acceso" class="seccion" aria-label="Acceso" hidden></section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

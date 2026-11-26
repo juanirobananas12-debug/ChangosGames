@@ -1,0 +1,132 @@
+body {
+  background: radial-gradient(circle at top left, #1a2030 0%, var(--color-fondo) 55%);
+  color: var(--color-texto);
+  font-family: var(--tipografia);
+  line-height: 1.5;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espacio);
+  padding: 14px clamp(16px, 4vw, 48px);
+  background: rgba(13, 17, 23, 0.92);
+  border-bottom: 1px solid var(--color-borde);
+  backdrop-filter: blur(10px);
+}
+
+.topbar__marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: auto;
+}
+
+.logo {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radio-pequeno);
+  background: linear-gradient(135deg, var(--color-primario), var(--color-acento));
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.topbar__marca h1 {
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+.topbar__marca p {
+  font-size: 0.75rem;
+  color: var(--color-texto-suave);
+}
+
+.topbar__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.topbar__sesion {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--color-texto-suave);
+}
+
+.contenedor {
+  width: min(1200px, 100% - 32px);
+  margin: 0 auto;
+  padding: 28px 0 64px;
+}
+
+.seccion[hidden] {
+  display: none !important;
+}
+
+.seccion__cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.seccion__cabecera h2 {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+}
+
+.seccion__cabecera p {
+  color: var(--color-texto-suave);
+  font-size: 0.9rem;
+}
+
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 16px;
+}
+
+.columnas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.fila {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.apilado {
+  display: grid;
+  gap: 14px;
+}
+
+.contenedor-tabla {
+  overflow-x: auto;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  background: var(--color-superficie);
+}
+
+@media (max-width: 720px) {
+  .topbar {
+    align-items: flex-start;
+  }
+
+  .topbar__nav {
+    order: 3;
+    width: 100%;
+  }
+}
