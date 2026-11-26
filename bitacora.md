@@ -19,12 +19,66 @@ Registro cronológico de cambios, decisiones y despliegues del proyecto.
 
 | Fecha | Tipo | Entrada | Estado |
 | --- | --- | --- | --- |
+| 2026-11-26 | deploy | Publicación en GitHub (rama `aplicacion-web`) | ✅ |
+| 2026-11-26 | chore | Pruebas funcionales en navegador | ✅ |
+| 2026-11-26 | chore | Puesta en marcha y pruebas de API en XAMPP | ✅ |
+| 2026-11-26 | fix | Correcciones detectadas durante las pruebas en vivo | ✅ |
 | 2026-11-26 | fix | Corrección de filtros en la API y consulta de ventas | ✅ |
 | 2026-11-26 | chore | Validación de sintaxis PHP (`php -l`) | ✅ |
 | 2026-11-26 | feat | Implementación de la aplicación web completa | ✅ |
 | 2026-11-26 | decision | Mapeo de diagramas a base de datos y reglas de negocio | ✅ |
 | 2026-11-26 | chore | Extracción de requisitos de los 7 PDF | ✅ |
 | 2026-11-26 | docs | Creación de reglas del proyecto y bitácora inicial | ✅ |
+
+---
+
+## 2026-11-26 — [deploy] Publicación en GitHub (rama `aplicacion-web`)
+
+- **Qué:** se inicializó Git en `C:\changosgames` (`git init -b main`), se configuró `origin` apuntando a `https://github.com/juanirobananas12-debug/ChangosGames.git` y se creó el commit `f406f64` con 48 archivos y 3261 inserciones. El historial se subió a una rama **nueva** `aplicacion-web` para no sobrescribir la rama `main` existente del repositorio (que contiene la documentación de las semanas anteriores).
+- **Por qué:** guardar y desplegar el proyecto en GitHub sin destruir el trabajo previo.
+- **Archivos:** todo el repositorio; `.env` excluido por `.gitignore`.
+- **Estado:** ✅ completado. PR sugerido: `https://github.com/juanirobananas12-debug/ChangosGames/pull/new/aplicacion-web`.
+- **Siguiente paso:** revisar el PR y fusionarlo en `main` cuando se confirme que es deseable reemplazar/mezclar el historial anterior.
+
+---
+
+## 2026-11-26 — [chore] Pruebas funcionales en navegador
+
+- **Qué:** se abrió `http://127.0.0.1:8000/public/index.html` en el navegador integrado. Sin errores en consola. Verificado:
+  - Catálogo con 7 productos y búsqueda (filtrar por "Kart" devuelve 1 producto).
+  - Login de cliente, menú con `Mis reservas`/`Ventas` y sin opciones de encargado.
+  - Reserva desde la UI (selector de entrega con etiquetas correctas) y cancelación con devolución de stock.
+  - Login de empleado: menú `Catálogo/Reservas/Ventas` y formulario de ingreso de productos.
+  - Login de administrador: menú completo; vistas de Caja (ingresos $1,898 / egresos $100 / saldo $1,798), reportes, registros y cuentas renderizadas.
+- **Por qué:** comprobar el frontend y los permisos por rol en un navegador real.
+- **Archivos:** solo lectura; sin modificaciones.
+- **Estado:** ✅ completado.
+- **Siguiente paso:** revisar visualmente el diseño y ajustar estilos si se requiere.
+
+---
+
+## 2026-11-26 — [chore] Puesta en marcha y pruebas de API en XAMPP
+
+- **Qué:** se importaron `schema.sql` y `seeds.sql` en MariaDB 10.4.32 y se ejecutó `php database/seed.php` (4 usuarios). Se inició el servidor integrado de PHP en `127.0.0.1:8000` y se probaron por HTTP: login de los 4 roles, búsqueda de productos, alta de producto, reserva, venta con tarjeta, confirmación de entrega, venta con efectivo y su cancelación (stock restaurado a 4), caja, reportes, registros, creación de cuenta y cambio de rol. Permisos verificados: un empleado recibe HTTP 403 al consultar caja; una petición POST sin token CSRF recibe HTTP 403. Después se reinició la BD a estado limpio (4 usuarios, 6 productos, 0 ventas/reservas).
+- **Por qué:** validar el backend completo antes de publicarlo.
+- **Archivos:** base de datos `changosgames` (sin cambios en el código).
+- **Estado:** ✅ completado.
+- **Siguiente paso:** usar las credenciales demo del README para pruebas manuales.
+
+---
+
+## 2026-11-26 — [fix] Correcciones detectadas durante las pruebas en vivo
+
+- **Qué:** se corrigieron 4 defectos que solo aparecieron al ejecutar la aplicación:
+  1. `Producto::listar()` y `Producto::ajustarStock()` repetían marcadores named (`:q`, `:delta`) con `ATTR_EMULATE_PREPARES=false`; PDO lanzaba `HY093`. Se usaron marcadores distintos (`:q1/:q2/:q3`, `:delta1/:delta2`).
+  2. `ui.js::campo()` creaba las opciones de `<select>` con el atributo `text` en vez de `texto`, por lo que no se veían las etiquetas. Corregido.
+  3. Los `<select>` generados empezaban sin selección válida; ahora toman la primera opción por defecto.
+  4. Tras `Salir`, el token CSRF en memoria quedaba obsoleto y el siguiente login devolvía 403. `api.logout()` ahora vuelve a pedir `auth.php?accion=yo` para renovarlo.
+  5. La cuenta demo se creaba como `admin` pero el README indicaba `administrador`; se unificó el nombre en `seed.php` y en la BD.
+- **Por qué:** los errores no se detectaron con `php -l` ni con la revisión estática; aparecieron al probar búsqueda, reservas y cambio de usuario.
+- **Archivos:** `src/models/Producto.php`, `public/js/ui.js`, `public/js/api.js`, `database/seed.php`.
+- **Estado:** ✅ completado y verificado de nuevo en navegador y por HTTP.
+- **Siguiente paso:** ninguno pendiente para estas correcciones.
 
 ---
 
@@ -36,8 +90,8 @@ Registro cronológico de cambios, decisiones y despliegues del proyecto.
   Además se creó `docs/README.md` para documentar los 7 PDF originales y se ajustó `README.md`.
 - **Por qué:** asegurar que los filtros del catálogo, reservas y caja funcionen y que la consulta de ventas sea compatible con la configuración estricta de MySQL.
 - **Archivos:** `public/js/api.js`, `src/models/Venta.php`, `docs/README.md`, `README.md`, `bitacora.md`.
-- **Estado:** ✅ completado (cambios escritos; la sintaxis PHP de `Venta.php` no se volvió a validar con `php -l` porque no hay nueva autorización para ejecutar comandos).
-- **Siguiente paso:** al autorizar, repetir `php -l` y probar los filtros en XAMPP.
+- **Estado:** ✅ completado y validado: `php -l` pasó nuevamente y los filtros funcionaron en XAMPP y en el navegador.
+- **Siguiente paso:** ninguno pendiente para esta corrección.
 
 ---
 
@@ -47,7 +101,7 @@ Registro cronológico de cambios, decisiones y despliegues del proyecto.
 - **Por qué:** verificar el código escrito antes de cualquier prueba en servidor o subida a GitHub.
 - **Archivos:** solo lectura; sin modificaciones.
 - **Estado:** ✅ completado.
-- **Siguiente paso:** (con autorización) importar `schema.sql` / `seeds.sql` y ejecutar `php database/seed.php` en XAMPP; validar también el JS con Node si se desea.
+- **Siguiente paso:** completado: la base de datos se importó y el JS se validó ejecutándolo en el navegador (no había Node instalado).
 
 ---
 
@@ -61,8 +115,8 @@ Registro cronológico de cambios, decisiones y despliegues del proyecto.
   - Cobertura: RF-01 a RF-12, casos de uso de los tres actores, altas de productos/cuentas, flujo de entrega, cancelación y vencimiento a 7 días, y los estados `abierta → reservada → pagada → registrada / cancelada`.
 - **Por qué:** construir la aplicación completa a partir de los 7 diagramas de `C:\changosgames` sin frameworks ni dependencias, dejándola lista para GitHub.
 - **Archivos:** `database/*`, `src/**`, `api/*`, `public/**`, `README.md`, `.gitignore`, `.env.example`, `claude.md`, `bitacora.md`.
-- **Estado:** ✅ completado (sintaxis PHP validada; sin instalar componentes ni modificar la base de datos).
-- **Siguiente paso:** con autorización, importar el esquema en MySQL y probar el flujo en XAMPP; después inicializar Git y subir a GitHub.
+- **Estado:** ✅ completado (sintaxis PHP validada, base de datos importada, API y navegador probados y código publicado en GitHub).
+- **Siguiente paso:** ninguno pendiente; revisar las decisiones pendientes del SRS con el encargado.
 
 ---
 

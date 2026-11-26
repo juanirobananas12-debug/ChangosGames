@@ -187,9 +187,10 @@ git push origin nombre-de-la-rama
 - [x] Crear bitácora (`bitacora.md`).
 - [x] Crear la estructura de carpetas y el `.gitignore`.
 - [x] Crear `README.md` y `.env.example`.
-- [ ] Inicializar Git y conectar el repositorio remoto de GitHub (requiere autorización del usuario).
+- [x] Inicializar Git y conectar el repositorio remoto de GitHub (rama `aplicacion-web`).
 - [x] Definir el esquema inicial en `database/schema.sql`.
 - [x] Implementar la aplicación web a partir de los diagramas de `C:\changosgames`.
+- [x] Importar la base de datos y probar la API y la interfaz en XAMPP/navegador.
 
 ---
 
